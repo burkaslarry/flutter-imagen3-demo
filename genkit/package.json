@@ -1,0 +1,29 @@
+{
+  "name": "genkit",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint --ext .js,.ts .",
+    "build": "tsc --skipLibCheck",
+    "build:watch": "tsc --watch",
+    "start": "node lib/index.js"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/json-schema": "^7.0.15",
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@genkit-ai/ai": "^0.9.7",
+    "@genkit-ai/vertexai": "^0.9.7",
+    "express": "^4.21.2",
+    "genkit": "^0.9.7"
+  }
+}
