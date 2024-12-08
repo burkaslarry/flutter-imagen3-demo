@@ -1,16 +1,12 @@
-# flutter_imagen3
+# Flutter Imagen3 Demo
 
-A new Flutter project.
+A Flutter application demonstrating image generation using Imagen3 via Genkit.
 
-## Getting Started
+## Articles
 
-This project is a starting point for a Flutter application.
+- [Flutter × Imagen 3 で画像生成アプリを作ってみた](https://zenn.dev/nozomi_cobo/articles/flutter-genkit-imagen)
+- [Getting Started with AI Image Generation Apps on Flutter, Genkit, and Imagen 3](https://medium.com/@nozomi-koborinai/getting-started-with-ai-image-generation-apps-on-flutter-genkit-and-imagen-3-9a83c63cbdf3)
 
-A few resources to get you started if this is your first Flutter project:
+## Overview
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This application allows users to generate images by providing text descriptions. It uses Google's Imagen3 model through Genkit for image generation.
