@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_imagen3/ui/components/generated_image_view.dart';
+import 'package:flutter_imagen3/ui/image_generator_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../usecase/generate_image_usecase.dart';
-
-final generatedImageUrlProvider = StateProvider<String?>((ref) => null);
 
 class ImageGeneratorPage extends ConsumerWidget {
   ImageGeneratorPage({super.key});
@@ -12,7 +10,8 @@ class ImageGeneratorPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageUrl = ref.watch(generatedImageUrlProvider);
+    final state = ref.watch(imageGeneratorNotifierProvider).state;
+    final notifier = ref.read(imageGeneratorNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -35,16 +34,11 @@ class ImageGeneratorPage extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () async {
-                {
-                  // Call the image generation usecase with the text input
-                  // and update the generated image URL in the state
-                  final generatedImageUrl = await ref
-                      .read(generateImageUsecaseProvider)
-                      .invoke(imageDescription: _controller.text);
-                  ref.read(generatedImageUrlProvider.notifier).state =
-                      generatedImageUrl;
-                }
+              onPressed: () {
+                notifier.generateImage(
+                  imageDescription: _controller.text,
+                  ref: ref,
+                );
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
@@ -58,9 +52,14 @@ class ImageGeneratorPage extends ConsumerWidget {
               child: const Text('Generate Image'),
             ),
             const SizedBox(height: 16),
-            if (imageUrl != null)
+            if (state.error != null)
+              Text(
+                state.error!,
+                style: const TextStyle(color: Colors.red),
+              ),
+            if (state.imageUrl != null)
               Expanded(
-                child: GeneratedImageView(imageUrl: imageUrl),
+                child: GeneratedImageView(imageUrl: state.imageUrl!),
               ),
           ],
         ),

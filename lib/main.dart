@@ -3,15 +3,6 @@ import 'package:flutter_imagen3/ui/components/overlay_loading.dart';
 import 'package:flutter_imagen3/ui/image_generator_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
-  runApp(
-    const ProviderScope(
-      overrides: [],
-      child: App(),
-    ),
-  );
-}
-
 class App extends ConsumerWidget {
   const App({super.key});
 
