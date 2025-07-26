@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_imagen3/config/app_config.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// Provider that holds a [Dio] instance
@@ -8,15 +9,20 @@ final dioProvider = Provider<Dio>(
 
 /// Provider for [GenkitClient] instance
 final genkitClientProvider = Provider<GenkitClient>(
-  (ref) => GenkitClient(dio: ref.read(dioProvider)),
+  (ref) => GenkitClient(
+    dio: ref.read(dioProvider),
+    appConfig: ref.read(appConfigProvider),
+  ),
 );
 
 /// Client for generating images using Imagen 3 via Genkit
 class GenkitClient {
   GenkitClient({
     required this.dio,
+    required this.appConfig,
   });
   final Dio dio;
+  final AppConfig appConfig;
 
   /// Generates an image based on the provided description and returns Base64 encoded image data
   ///
@@ -25,7 +31,7 @@ class GenkitClient {
   Future<String> generateImage({required String imageDescription}) async {
     try {
       final response = await dio.post(
-        'https://<YOUR_GENKIT_ENDPOINT>/generateImage',
+        '${appConfig.genkitEndpoint}/generateImage',
         data: {
           'data': {
             'imageDescription': imageDescription,
